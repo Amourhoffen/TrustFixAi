@@ -39,12 +39,21 @@ Our architecture is built on Next.js, deployed natively on Google Cloud Run for 
 4. **Dynamic Action:** Backend parses this data and queries the **YouTube Data API** for DIY tutorials.
 5. **Failover Protocol:** Built-in Catch blocks automatically route to Llama 3.1 if primary APIs fail.
 
-## 💻 Tech Stack
+## 📋 List of Features
+1. **Multimodal AI Vision Scanner:** Instantly analyzes uploaded images using Gemini 2.5 Vision to accurately diagnose structural, mechanical, or civic issues.
+2. **Dynamic Anti-Scam Cost Estimator:** Automatically calculates and displays a localized, transparent repair cost estimate (in INR) before the user contacts a professional.
+3. **Automated DIY Video Integration:** Seamlessly fetches highly-rated DIY repair tutorials via the YouTube Data API when an issue is safe to fix at home.
+4. **Resilient Multi-Model AI Architecture:** Guarantees 100% uptime by automatically cascading from Google Gemini to Hugging Face models if API rate limits are hit.
+5. **Gamified Trust Ecosystem (Trust Scores):** A community-driven reputation system where citizens earn "Trust Points" for accurately reporting civic issues or verifying the quality of local repair professionals.
+6. **Premium & Accessible UI/UX:** Built with Next.js, Framer Motion, and Tailwind CSS. Features micro-animations and strict WCAG accessibility compliance.
+
+## 💻 Tech Stack & Google Cloud Integration
 - **Frontend:** Next.js 16 (React, TypeScript), Tailwind CSS, Framer Motion, Sonner
 - **Backend:** Next.js API Routes (Serverless)
-- **AI Models:** Google Gemini 2.5 Flash, Llama 3.1 8B (via Hugging Face)
-- **APIs:** YouTube Data API v3
-- **Deployment:** Google Cloud Run, Docker, GitHub Actions / Vercel
+- **Primary AI (Google):** Google Gemini 2.5 Flash (via Google AI SDK) for high-speed, multimodal visual diagnostics.
+- **Fallback AI:** Llama 3.1 8B (via Hugging Face Inference API)
+- **External APIs:** YouTube Data API v3
+- **Deployment & Scalability:** Google Cloud Run. We chose Cloud Run to provide true serverless scalability. As a containerized solution, it automatically scales to zero during downtime to save costs, and scales up to thousands of concurrent requests instantly during high traffic. This, combined with our Multi-Model AI Fallback system, guarantees 100% uptime for real-world civic deployments.
 
 ## 🎯 Social & Practical Impact
 - **For Citizens:** Saves thousands of rupees by preventing overcharging and enabling safe DIY repairs.
