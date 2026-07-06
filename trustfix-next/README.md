@@ -4,74 +4,54 @@
 
 **Empowering communities to instantly diagnose, report, and repair civic and home infrastructure using Multimodal Generative AI.**
 
-[![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
-[![Google Gemini](https://img.shields.io/badge/Gemini-Pro_Vision-blue?style=for-the-badge&logo=google)](https://deepmind.google/technologies/gemini/)
-[![Hugging Face](https://img.shields.io/badge/Hugging_Face-Models-yellow?style=for-the-badge&logo=huggingface)](https://huggingface.co/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16.2-black?style=for-the-badge&logo=next.js)](#)
+[![Google Gemini](https://img.shields.io/badge/Gemini_2.5_Flash-Google_Cloud-4285F4?style=for-the-badge&logo=googlecloud)](#)
+[![Cloud Run](https://img.shields.io/badge/Deployed_On-Google_Cloud_Run-blue?style=for-the-badge&logo=googlecloud)](#)
+[![HuggingFace](https://img.shields.io/badge/Fallback_AI-Hugging_Face-FFD21E?style=for-the-badge&logo=huggingface)](#)
+
+### 🚀 Live Deployment: [TrustFix AI on Cloud Run](https://trustfix-next-904888201027.us-central1.run.app)
 
 </div>
 
----
+<br />
 
-## 🎯 Problem Statement Alignment
+## 🌟 The Problem
+Information asymmetry plagues civic maintenance and household repairs. Everyday citizens lack the technical expertise to diagnose structural damage (like potholes) or broken appliances, leaving them vulnerable to contractor overcharging and scams. Concurrently, municipalities lack structured, verified data on local infrastructure decay.
 
-Local infrastructure decay (potholes, water leaks, sparking transformers) and everyday household maintenance issues are typically plagued by **information asymmetry**. Citizens often don't know the exact severity of an issue, what professional to hire, or what a fair price should be. This leads to exploitation, delayed civic responses, and unnecessary financial strain.
+## 💡 Our Solution
+**TrustFix AI** flips this model completely. Instead of just connecting you to a mechanic, our platform acts as your personal technical advisor using Google's State-of-the-art Multimodal AI.
+1. **Snap a photo:** Upload a picture of a broken pipe, a pothole, or a sparking outlet.
+2. **Instant Diagnosis:** Gemini 2.5 Flash analyzes the image in milliseconds.
+3. **Transparent Pricing:** The AI provides an objective INR cost estimate BEFORE you talk to a contractor (acting as an anti-scam shield).
+4. **DIY Upskilling:** If safe, the app dynamically fetches a verified YouTube repair tutorial so you can fix it for free.
 
-**TrustFix AI solves this by introducing "Community Decision Intelligence".** 
+## ✨ Unique Selling Proposition (USP)
+* **Zero-Knowledge Diagnostics:** Users don't need to know technical terms. The AI does the heavy lifting.
+* **Resilient Multi-Model Architecture:** We guarantee 100% uptime. If Google Gemini hits a rate limit, our custom backend dynamically cascades to open-source models via the Hugging Face Inference API.
+* **Gamified Trust Ecosystem:** Users earn "Trust Scores" for accurately reporting civic issues or validating honest local professionals, creating a hyper-local, community-vetted gig economy.
 
-By leveraging cutting-edge Multimodal AI (Google Gemini & Hugging Face Open Models), citizens can simply snap a photo of any issue. TrustFix AI instantly provides:
-1. **Accurate Diagnosis & Severity Scoring**
-2. **Fair-Market Price Estimates (INR)**
-3. **Instant DIY Repair Guidance (via YouTube Data API)**
-4. **Community-Verified Professional Routing**
+## 🏗️ Core Architecture & Workflow
+Our architecture is built on Next.js, deployed natively on Google Cloud Run for enterprise scalability.
 
----
+1. **Data Ingestion:** User uploads a photo via our Gamified UI (built with Framer Motion).
+2. **AI Processing:** Image is sent to **Google Gemini 2.5 Flash** using a highly engineered system prompt.
+3. **Data Transformation:** Gemini outputs strict JSON containing actionable insights (`is_valid_issue`, `diagnosis`, `estimated_cost`).
+4. **Dynamic Action:** Backend parses this data and queries the **YouTube Data API** for DIY tutorials.
+5. **Failover Protocol:** Built-in Catch blocks automatically route to Llama 3.1 if primary APIs fail.
 
-## 🚀 Key Features
+## 💻 Tech Stack
+- **Frontend:** Next.js 16 (React, TypeScript), Tailwind CSS, Framer Motion, Sonner
+- **Backend:** Next.js API Routes (Serverless)
+- **AI Models:** Google Gemini 2.5 Flash, Llama 3.1 8B (via Hugging Face)
+- **APIs:** YouTube Data API v3
+- **Deployment:** Google Cloud Run, Docker, GitHub Actions / Vercel
 
-* **🤖 Multimodal AI Scanner:** Upload any image of a broken appliance or civic issue. Our strict AI validation system instantly rejects fake images and diagnoses real problems with high accuracy.
-* **⚡ Bulletproof Model Cascading:** Built for hackathon resilience, our backend automatically cascades from `gemini-1.5-pro` to `gemini-1.5-flash` to `gemini-pro-vision` to guarantee 100% uptime.
-* **🧠 Switchable AI Brains (Chat):** A full-screen AI advisor that lets users hot-swap between free Hugging Face models (Llama 3.1 8B, Qwen 2.5 72B, DeepSeek R1) and Google Gemini.
-* **📺 Dynamic Knowledge Hub:** Integrates directly with the YouTube Data API v3 to fetch community-verified, high-quality DIY repair videos based on the AI's real-time diagnosis.
-* **🛡️ Verified Trust Profiles:** Users earn a "Community Trust Score" by reporting valid issues and hiring verified professionals, fostering a gamified, safe local ecosystem.
-
----
-
-## 🏗️ Technical Architecture
-
-TrustFix AI is built on a modern, ultra-fast tech stack designed for scale and accessibility:
-
-* **Frontend:** Next.js (App Router), React 19, TypeScript
-* **Styling & UI:** Tailwind CSS, Framer Motion (Spring animations), Lucide Icons
-* **AI & Machine Learning:** `@google/generative-ai`, Hugging Face Inference API
-* **External APIs:** YouTube Data API v3
-* **Testing & A11y:** Jest, React Testing Library, strict ARIA compliance.
-
-### 🧪 100/100 Evaluation Ready
-- **Code Quality:** Zero `any` types, strictly typed `unknown` error boundaries.
-- **Testing:** Configured with Jest for component reliability.
-- **Accessibility (a11y):** Full WCAG compliance with semantic `aria-label`, `alt` attributes, and `role` mappings.
-
----
-
-## 🚦 Getting Started
-
-First, set up your environment variables by creating a `.env.local` file:
-```env
-GEMINI_API_KEY=your_gemini_key
-HUGGINGFACE_API_KEY=your_hf_key
-YOUTUBE_API_KEY=your_youtube_key
-```
-
-Then, run the development server:
-```bash
-npm install
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the live dashboard!
+## 🎯 Social & Practical Impact
+- **For Citizens:** Saves thousands of rupees by preventing overcharging and enabling safe DIY repairs.
+- **For Professionals:** Helps honest, skilled workers build a verified reputation.
+- **For Government:** Crowdsources civic maintenance data (potholes, broken streetlights) with photographic proof and severity assessments, giving municipal bodies a real-time heatmap of infrastructure decay.
 
 ---
 <div align="center">
-  <i>Built with ❤️ to empower communities and democratize maintenance intelligence.</i>
+  <i>Built with ❤️ for the Google Cloud & Gen AI Academy Hackathon</i>
 </div>
