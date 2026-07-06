@@ -33,11 +33,65 @@ Information asymmetry plagues civic maintenance and household repairs. Everyday 
 ## 🏗️ Core Architecture & Workflow
 Our architecture is built on Next.js, deployed natively on Google Cloud Run for enterprise scalability.
 
-1. **Data Ingestion:** User uploads a photo via our Gamified UI (built with Framer Motion).
+1. **Data Ingestion:** User uploads a photo via our Gamified UI.
 2. **AI Processing:** Image is sent to **Google Gemini 2.5 Flash** using a highly engineered system prompt.
-3. **Data Transformation:** Gemini outputs strict JSON containing actionable insights (`is_valid_issue`, `diagnosis`, `estimated_cost`).
+3. **Data Transformation:** Gemini outputs strict JSON containing actionable insights.
 4. **Dynamic Action:** Backend parses this data and queries the **YouTube Data API** for DIY tutorials.
 5. **Failover Protocol:** Built-in Catch blocks automatically route to Llama 3.1 if primary APIs fail.
+
+### Architecture Diagram
+```mermaid
+graph TD
+    classDef client fill:#3b82f6,stroke:#1e3a8a,stroke-width:2px,color:#fff;
+    classDef server fill:#10b981,stroke:#064e3b,stroke-width:2px,color:#fff;
+    classDef cloud fill:#f59e0b,stroke:#78350f,stroke-width:2px,color:#fff;
+    classDef external fill:#8b5cf6,stroke:#4c1d95,stroke-width:2px,color:#fff;
+    classDef database fill:#ef4444,stroke:#7f1d1d,stroke-width:2px,color:#fff;
+
+    subgraph Client ["Client Side / User Device"]
+        Browser["Web Browser / Mobile"]:::client
+        NextUI["Next.js Frontend (React, Tailwind)"]:::client
+        Browser <--> NextUI
+    end
+
+    subgraph GCP ["Google Cloud Platform"]
+        CloudRun["Cloud Run (Containerized Deployment)"]:::cloud
+    end
+
+    subgraph Server ["Backend API Routes (Node.js)"]
+        AnalyzeAPI["/api/analyze"]:::server
+        ChatAPI["/api/chat"]:::server
+        YouTubeAPI["/api/youtube"]:::server
+    end
+
+    subgraph ThirdParty ["External APIs & AI Models"]
+        Gemini["Google Gemini 2.5 Flash (Vision)"]:::external
+        HF["Hugging Face Inference (Llama 3.1 8B)"]:::external
+        YT["YouTube Data API v3"]:::database
+    end
+
+    NextUI <-->|"HTTP POST"| CloudRun
+    CloudRun <--> AnalyzeAPI
+    CloudRun <--> ChatAPI
+    CloudRun <--> YouTubeAPI
+
+    AnalyzeAPI <-->|"Primary Route"| Gemini
+    AnalyzeAPI -.->|"Fallback Route"| HF
+    ChatAPI <-->|"Primary Route"| HF
+    ChatAPI -.->|"Fallback Route"| Gemini
+    
+    YouTubeAPI <-->|"Fetch Videos"| YT
+    AnalyzeAPI -->|"Triggers"| YouTubeAPI
+```
+
+## 📸 Application Screenshots
+
+*(Add your real application screenshots here to showcase the UI)*
+
+<div align="center">
+  <img src="public/dashboard_screenshot.png" alt="Community Dashboard" width="400"/>
+  <img src="public/scanner_screenshot.png" alt="AI Scanner UI" width="400"/>
+</div>
 
 ## 📋 List of Features
 1. **Multimodal AI Vision Scanner:** Instantly analyzes uploaded images using Gemini 2.5 Vision to accurately diagnose structural, mechanical, or civic issues.
