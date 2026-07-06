@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+google-generativeai
+python-multipart
+firebase-admin
+scikit-learn
+numpy
+google-api-python-client

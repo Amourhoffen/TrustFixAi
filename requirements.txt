@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+google-generativeai
+python-multipart
+pillow
+langchain
+langchain-core
+langchain-google-genai
+faiss-cpu
+rank_bm25
